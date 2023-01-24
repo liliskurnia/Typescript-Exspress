@@ -35,11 +35,19 @@ class UserController implements IController {
     }
 
     update(req: Request, res: Response) : Response {
-        throw new Error("Method not implemented.");
+        const {id} = req.params;
+        const {name}= req.body;
+        let person = data.find(item => item.id == id );
+        person.name = name;
+        
+        return res.send("Name updated");
     }
 
     delete(req: Request, res: Response) : Response {
-        throw new Error("Method not implemented.");
+        const {id} = req.params;
+        let people = data.filter(item => item.id != id );
+        
+        return res.send(people);
     }
 
 }
