@@ -9,12 +9,15 @@ const morgan_1 = __importDefault(require("morgan"));
 const compression_1 = __importDefault(require("compression"));
 const helmet_1 = __importDefault(require("helmet"));
 const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = require("dotenv");
+//router
 const UserRoutes_1 = __importDefault(require("./routers/UserRoutes"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();
         this.plugins();
         this.routes();
+        (0, dotenv_1.config)();
     }
     plugins() {
         this.app.use(body_parser_1.default.json());
@@ -34,9 +37,5 @@ const port = 8000;
 const app = new App().app;
 app.listen(port, () => {
     console.log("Aplikasi ini berjalan di port" + port);
+    console.log(process.env.DB_USER);
 });
-// const app = express();
-// app.route("/").get((req, res) => {
-//     res.send("halo, ini router pertama saya");
-// });
-// app.listen(8000);

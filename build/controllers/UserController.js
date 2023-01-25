@@ -9,6 +9,7 @@ let data = [
 ];
 class UserController {
     index(req, res) {
+        console.log("ini adalah index users");
         return res.send(data);
     }
     create(req, res) {

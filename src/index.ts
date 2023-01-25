@@ -4,6 +4,9 @@ import morgan from "morgan";
 import compression from "compression";
 import helmet from "helmet";
 import cors from "cors";
+import {config as dotenv} from "dotenv";
+
+//router
 import UserRoutes from "./routers/UserRoutes";
 
 class App {
@@ -13,7 +16,7 @@ class App {
         this.app = express();
         this.plugins();
         this.routes();
-        
+        dotenv();
     }
 
     protected plugins(): void {
@@ -36,13 +39,6 @@ class App {
 const port: number = 8000;
 const app = new App().app;
 app.listen(port, () => {
-    console.log("Aplikasi ini berjalan di port" + port);
+    console.log("Aplikasi ini berjalan di port" + port)
+    console.log(process.env.DB_USER);
 });
-
-
-// const app = express();
-// app.route("/").get((req, res) => {
-//     res.send("halo, ini router pertama saya");
-// });
-
-// app.listen(8000);
