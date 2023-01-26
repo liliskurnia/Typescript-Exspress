@@ -1,15 +1,43 @@
+import { compare } from "bcrypt";
 import { Request, Response } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
+import Authentication from "../utils/Authentication";
+const db = require("../db/models")
 
 class AuthController {
 
-    index(req: Request, res: Response) : Response {
-        return res.send("");
+    register = async(req: Request, res: Response) : Promise<Response> => {
+        let {username, password} = req.body;
+        const hashedPassword: string = await Authentication.passwordHash(password);
+
+        await db.user.create({username, password: hashedPassword});
+        // return res.send(createdUser);
+        return res.send("registrasi berhasil");
     }
 
-    create(req: Request, res: Response) : Response {
-        return res.send("")
+    login = async(req: Request, res: Response) : Promise<Response> => {
+        
+        //cari data user by username
+        let {username, password} = req.body;
+        const user = await db.user.findOne({
+            where : {username}
+        });
+        // return res.send(user);
+
+        //check password
+        // if (user){
+            let compare =await Authentication.passwordCompare(password, user.password);
+        //     return res.send(compare);
+        // }
+        // return res.send("user not found");
+
+        //generate token 
+        if ( compare){
+            let token = Authentication.generateToken(user.id, username, user.password);
+            return res.send({
+                token
+            });
+        }
+        return res.send("auth failed");
     }
 
 }
