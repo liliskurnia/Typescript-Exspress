@@ -1,0 +1,338 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sample API",
+        "description": "Daftar API",
+        "version": "0.1.9"
+    },
+    "_servers":{
+        "url": "http://localhost:8000",
+        "description": "localhost"
+    },
+    "tags":[
+        {
+            "name": "Users",
+            "description": "User"
+        },
+        {
+            "name": "Todos",
+            "description": "Todo"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        }
+    ],
+    "paths":{
+        "/api/v1/users":{
+            "get":{
+                "tags":[
+                    "Users"
+                ],
+                "summary": "Get all users",
+                "description": "",
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            },
+            "post": {
+                "tags":[
+                    "Users"
+                ],
+                "summary": "Post user",
+                "consumes": "multipart/form-data",
+                "requestBody":{
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "username":{
+                                        "type": "string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}":{
+            "get":{
+                "tags":[
+                    "Users"
+                ],
+                "summary": "Get one user",
+                "description": "",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema":{
+                            "type": "integer"
+                        },
+                        "description": "ID User"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            },
+            "put":{
+                "tags":[
+                    "Users"
+                ],
+                "summary": "Update user",
+                "description": "",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema":{
+                            "type": "integer"
+                        },
+                        "description": "ID User"
+                    }
+                ],
+                "requestBody":{
+                    "content": {
+                        "application/json": {
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "username":{
+                                        "type": "string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            },
+            "delete":{
+                "tags":[
+                    "Users"
+                ],
+                "summary": "Delete user",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema":{
+                            "type": "integer"
+                        },
+                        "description": "ID User"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login":{
+            "post":{
+                "tags":[
+                    "Auth"
+                ],
+                "summary": "Login",
+                "consumes": "multipart/form-data",
+                "requestBody":{
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "username":{
+                                        "type": "string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/register":{
+            "post":{
+                "tags":[
+                    "Auth"
+                ],
+                "summary": "Register",
+                "consumes": "multipart/form-data",
+                "requestBody":{
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "username":{
+                                        "type": "string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/todos":{
+            "get":{
+                "tags":[
+                    "Todos"
+                ],
+                "summary": "Get all todos",
+                "description": "",
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            },
+            "post": {
+                "tags":[
+                    "Todos"
+                ],
+                "summary": "Post todos",
+                "consumes": "multipart/form-data",
+                "requestBody":{
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "description":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/todos/{id}":{
+            "get":{
+                "tags":[
+                    "Todos"
+                ],
+                "summary": "Get one todos",
+                "description": "",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "user_id",
+                        "schema":{
+                            "type": "integer"
+                        },
+                        "description": "User Id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            },
+            "put":{
+                "tags":[
+                    "Todos"
+                ],
+                "summary": "Update todos",
+                "description": "",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "user_id",
+                        "schema":{
+                            "type": "integer"
+                        },
+                        "description": "User Id"
+                    }
+                ],
+                "requestBody":{
+                    "content": {
+                        "application/json": {
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "description":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            },
+            "delete":{
+                "tags":[
+                    "Todos"
+                ],
+                "summary": "Delete todos",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "user_id",
+                        "schema":{
+                            "type": "integer"
+                        },
+                        "description": "User Id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    }
+}

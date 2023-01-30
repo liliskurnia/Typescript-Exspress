@@ -14,6 +14,9 @@ const dotenv_1 = require("dotenv");
 const UserRoutes_1 = __importDefault(require("./routers/UserRoutes"));
 const AuthRoutes_1 = __importDefault(require("./routers/AuthRoutes"));
 const TodoRoutes_1 = __importDefault(require("./routers/TodoRoutes"));
+//swagger 
+const swaggerUi = require('swagger-ui-express');
+const apiDocumentation = require('../apidocs.json');
 class App {
     constructor() {
         this.app = (0, express_1.default)();
@@ -27,6 +30,7 @@ class App {
         this.app.use((0, compression_1.default)());
         this.app.use((0, helmet_1.default)());
         this.app.use((0, cors_1.default)());
+        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocumentation));
     }
     routes() {
         this.app.route("/").get((req, res) => {

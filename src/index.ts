@@ -11,6 +11,10 @@ import UserRoutes from "./routers/UserRoutes";
 import AuthRoutes from "./routers/AuthRoutes";
 import TodoRoutes from "./routers/TodoRoutes";
 
+//swagger 
+const swaggerUi = require('swagger-ui-express');
+const apiDocumentation = require ('../apidocs.json');
+
 class App {
     public app: Application;
 
@@ -27,6 +31,7 @@ class App {
         this.app.use(compression());
         this.app.use(helmet());
         this.app.use(cors());
+        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocumentation));
     }
 
     protected routes(): void {
