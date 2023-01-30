@@ -4,6 +4,7 @@ import TodoService from "../services/TodoService";
 
 class TodoController implements IController {
 
+    //find all
     index= async (req: Request, res: Response) : Promise<Response> => {
         const service: TodoService = new TodoService(req);
         const todos = await service.getAll();
@@ -14,6 +15,7 @@ class TodoController implements IController {
         });
     }
 
+    //create new data
     create = async (req: Request, res: Response) : Promise<Response> => {
         const service: TodoService = new TodoService(req);
         const todos = await service.store();
@@ -24,6 +26,7 @@ class TodoController implements IController {
         });
     }
 
+    //find by id
     show = async (req: Request, res: Response) : Promise<Response> => {
         const service: TodoService = new TodoService(req);
         const todo = await service.getOne();
@@ -34,6 +37,7 @@ class TodoController implements IController {
         });
     }
 
+    //update data
     update = async (req: Request, res: Response) : Promise<Response> => {
         const service: TodoService = new TodoService(req);
         const todo = await service.update();
@@ -44,6 +48,7 @@ class TodoController implements IController {
         });
     }
 
+    //delete data 
     delete = async (req: Request, res: Response) : Promise<Response> => {
         const service: TodoService = new TodoService(req);
         const todo = await service.delete();

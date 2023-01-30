@@ -14,6 +14,7 @@ class TodoService {
         this.params = req.params;
     }
 
+    //methode menampilkan semua data 
     getAll = async () => {
         const todos = await db.todo.findAll({
             where: { user_id : this.credential.id},
@@ -35,6 +36,7 @@ class TodoService {
         return todo;
     }
 
+    //methode find data by id  
     getOne = async () => {
         const {id} = this.params;
 
@@ -47,6 +49,7 @@ class TodoService {
         return todo;
     }
 
+    //methode update data 
     update = async () => {
         const {id} = this.params;
         const {description} = this.body;
@@ -62,6 +65,7 @@ class TodoService {
         return todo;
     }
 
+    //methode delete data 
     delete = async () => {
         const {id} = this.params;
 
