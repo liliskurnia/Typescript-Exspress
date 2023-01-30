@@ -10,6 +10,7 @@ const compression_1 = __importDefault(require("compression"));
 const helmet_1 = __importDefault(require("helmet"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = require("dotenv");
+// const app = express();
 //router
 const UserRoutes_1 = __importDefault(require("./routers/UserRoutes"));
 const AuthRoutes_1 = __importDefault(require("./routers/AuthRoutes"));
@@ -30,7 +31,6 @@ class App {
         this.app.use((0, compression_1.default)());
         this.app.use((0, helmet_1.default)());
         this.app.use((0, cors_1.default)());
-        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocumentation));
     }
     routes() {
         this.app.route("/").get((req, res) => {
@@ -47,3 +47,4 @@ app.listen(port, () => {
     console.log("Aplikasi ini berjalan di port" + port);
     console.log(process.env.DB_USER);
 });
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocumentation));

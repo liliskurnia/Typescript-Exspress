@@ -42,10 +42,10 @@
                     "Users"
                 ],
                 "summary": "Post user",
-                "consumes": "multipart/form-data",
+                "consumes": "application/json",
                 "requestBody":{
                     "content": {
-                        "multipart/form-data":{
+                        "application/json":{
                             "schema":{
                                 "type": "object",
                                 "properties": {
@@ -157,10 +157,10 @@
                     "Auth"
                 ],
                 "summary": "Login",
-                "consumes": "multipart/form-data",
+                "consumes": "application/json",
                 "requestBody":{
                     "content": {
-                        "multipart/form-data":{
+                        "application/json":{
                             "schema":{
                                 "type": "object",
                                 "properties": {
@@ -188,10 +188,10 @@
                     "Auth"
                 ],
                 "summary": "Register",
-                "consumes": "multipart/form-data",
+                "consumes": "application/json",
                 "requestBody":{
                     "content": {
-                        "multipart/form-data":{
+                        "application/json":{
                             "schema":{
                                 "type": "object",
                                 "properties": {
@@ -231,10 +231,10 @@
                     "Todos"
                 ],
                 "summary": "Post todos",
-                "consumes": "multipart/form-data",
+                "consumes": "application/json",
                 "requestBody":{
                     "content": {
-                        "multipart/form-data":{
+                        "application/json":{
                             "schema":{
                                 "type": "object",
                                 "properties": {
@@ -320,11 +320,11 @@
                 "parameters":[
                     {
                         "in": "path",
-                        "name": "user_id",
+                        "name": "id",
                         "schema":{
                             "type": "integer"
                         },
-                        "description": "User Id"
+                        "description": "Todo Id"
                     }
                 ],
                 "responses": {

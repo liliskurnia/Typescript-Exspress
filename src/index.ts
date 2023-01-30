@@ -5,7 +5,7 @@ import compression from "compression";
 import helmet from "helmet";
 import cors from "cors";
 import {config as dotenv} from "dotenv";
-
+// const app = express();
 //router
 import UserRoutes from "./routers/UserRoutes"; 
 import AuthRoutes from "./routers/AuthRoutes";
@@ -31,7 +31,6 @@ class App {
         this.app.use(compression());
         this.app.use(helmet());
         this.app.use(cors());
-        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocumentation));
     }
 
     protected routes(): void {
@@ -51,3 +50,5 @@ app.listen(port, () => {
     console.log("Aplikasi ini berjalan di port" + port)
     console.log(process.env.DB_USER);
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocumentation));
