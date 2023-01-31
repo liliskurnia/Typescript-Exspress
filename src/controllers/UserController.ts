@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import IController from "./ControllerInterface";
 import UserService from "../services/UserService";
+import Authentication from "../utils/Authentication";
+const db = require("../db/models")
 
 class UserController implements IController {
 
@@ -16,14 +18,13 @@ class UserController implements IController {
     }
 
     //create new data
-    create = async (req: Request, res: Response) : Promise<Response> => {
-        const service: UserService = new UserService(req);
-        const users = await service.store();
+    create = async(req: Request, res: Response) : Promise<Response> => {
+        let {username, password} = req.body;
+        const hashedPassword: string = await Authentication.passwordHash(password);
 
-        return res.send({
-            data : users,
-            message : "user create"
-        });
+        await db.user.create({username, password: hashedPassword});
+        // return res.send(createdUser);
+        return res.send("user create");
     }
 
     //find by id

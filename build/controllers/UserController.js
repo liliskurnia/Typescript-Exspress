@@ -13,6 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const UserService_1 = __importDefault(require("../services/UserService"));
+const Authentication_1 = __importDefault(require("../utils/Authentication"));
+const db = require("../db/models");
 class UserController {
     constructor() {
         //find all
@@ -26,12 +28,11 @@ class UserController {
         });
         //create new data
         this.create = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const service = new UserService_1.default(req);
-            const users = yield service.store();
-            return res.send({
-                data: users,
-                message: "user create"
-            });
+            let { username, password } = req.body;
+            const hashedPassword = yield Authentication_1.default.passwordHash(password);
+            yield db.user.create({ username, password: hashedPassword });
+            // return res.send(createdUser);
+            return res.send("user create");
         });
         //find by id
         this.show = (req, res) => __awaiter(this, void 0, void 0, function* () {
