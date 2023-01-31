@@ -4,8 +4,6 @@ const db = require('../db/models');
 class UserService {
     credential: {
         id: number
-        // username : string
-        // password : string
     };
     body: Request['body'];
     params : Request ['params'];
