@@ -27,9 +27,10 @@ class UserService {
 
     //methode menyimpan data 
     store = async () => {
-        const {description} = this.body;
+        const {username, password} = this.body;
 
         const users = await db.user.create({
+            username, password
         });
 
         return users;
@@ -49,10 +50,10 @@ class UserService {
     //methode update data 
     update = async () => {
         const {id} = this.params;
-        const {description} = this.body;
+        const {username, password} = this.body;
 
         const users = await db.user.update({
-            description
+            username, password
         }, {
             where: {id}
         });
