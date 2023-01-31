@@ -1,55 +1,64 @@
 import { Request, Response } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
 import IController from "./ControllerInterface";
-
-let data : any[] = [
-    {id : 1, name: "Adi"},
-    {id : 2, name: "Budi"},
-    {id : 3, name: "Cidi"},
-    {id : 4, name: "Didi"},
-    {id : 5, name: "Edi"},
-    
-]
+import UserService from "../services/UserService";
 
 class UserController implements IController {
 
-    index(req: Request, res: Response) : Response {
-        console.log("ini adalah index users");
-        return res.send(data);
+    //find all
+    index= async (req: Request, res: Response) : Promise<Response> => {
+        const service: UserService = new UserService(req);
+        const users = await service.getAll();
+
+        return res.send({
+            data : users,
+            message : ""
+        });
     }
 
-    create(req: Request, res: Response) : Response {
-        const {id, name} = req.body;
-        data.push ({ id, name});
-        // data.push ({
-        //     id : id,
-        //     name : name
-        // });
-        return res.send("Create success")
+    //create new data
+    create = async (req: Request, res: Response) : Promise<Response> => {
+        const service: UserService = new UserService(req);
+        const users = await service.store();
+
+        return res.send({
+            data : users,
+            message : "user create"
+        });
     }
 
-    show(req: Request, res: Response) : Response {
-        const {id} = req.params;
-        let person = data.find(item => item.id == id);
-        return res.send(person);
-    }
-
-    update(req: Request, res: Response) : Response {
-        const {id} = req.params;
-        const {name}= req.body;
-        let person = data.find(item => item.id == id );
-        person.name = name;
+    //find by id
+    show = async (req: Request, res: Response) : Promise<Response> => {
+        const service: UserService = new UserService(req);
+        const users = await service.getOne();
         
-        return res.send("Name updated");
+        return res.send({
+            data : users,
+            message : ""
+        });
     }
 
-    delete(req: Request, res: Response) : Response {
-        const {id} = req.params;
-        let people = data.filter(item => item.id != id );
-        
-        return res.send(people);
+    //update data
+    update = async (req: Request, res: Response) : Promise<Response> => {
+        const service: UserService = new UserService(req);
+        const users = await service.update();
+
+        return res.send({
+            data : users,
+            message : "user updated"
+        });
     }
+
+    //delete data 
+    delete = async (req: Request, res: Response) : Promise<Response> => {
+        const service: UserService = new UserService(req);
+        const users = await service.delete();
+
+        return res.send({
+            data : users,
+            message : "user deleted"
+        });
+    }
+
 
 }
 

@@ -1,42 +1,65 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-let data = [
-    { id: 1, name: "Adi" },
-    { id: 2, name: "Budi" },
-    { id: 3, name: "Cidi" },
-    { id: 4, name: "Didi" },
-    { id: 5, name: "Edi" },
-];
+const UserService_1 = __importDefault(require("../services/UserService"));
 class UserController {
-    index(req, res) {
-        console.log("ini adalah index users");
-        return res.send(data);
-    }
-    create(req, res) {
-        const { id, name } = req.body;
-        data.push({ id, name });
-        // data.push ({
-        //     id : id,
-        //     name : name
-        // });
-        return res.send("Create success");
-    }
-    show(req, res) {
-        const { id } = req.params;
-        let person = data.find(item => item.id == id);
-        return res.send(person);
-    }
-    update(req, res) {
-        const { id } = req.params;
-        const { name } = req.body;
-        let person = data.find(item => item.id == id);
-        person.name = name;
-        return res.send("Name updated");
-    }
-    delete(req, res) {
-        const { id } = req.params;
-        let people = data.filter(item => item.id != id);
-        return res.send(people);
+    constructor() {
+        //find all
+        this.index = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const service = new UserService_1.default(req);
+            const users = yield service.getAll();
+            return res.send({
+                data: users,
+                message: ""
+            });
+        });
+        //create new data
+        this.create = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const service = new UserService_1.default(req);
+            const users = yield service.store();
+            return res.send({
+                data: users,
+                message: "user create"
+            });
+        });
+        //find by id
+        this.show = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const service = new UserService_1.default(req);
+            const users = yield service.getOne();
+            return res.send({
+                data: users,
+                message: ""
+            });
+        });
+        //update data
+        this.update = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const service = new UserService_1.default(req);
+            const users = yield service.update();
+            return res.send({
+                data: users,
+                message: "user updated"
+            });
+        });
+        //delete data 
+        this.delete = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const service = new UserService_1.default(req);
+            const users = yield service.delete();
+            return res.send({
+                data: users,
+                message: "user deleted"
+            });
+        });
     }
 }
 exports.default = new UserController;
