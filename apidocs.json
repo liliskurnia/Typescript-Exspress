@@ -5,6 +5,18 @@
         "description": "Daftar API",
         "version": "0.1.9"
     },
+    "components":{
+        "securitySchemes":{
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security":{
+        "bearerAuth": []
+    },
     "_servers":{
         "url": "http://localhost:8000",
         "description": "localhost"
@@ -26,6 +38,9 @@
     "paths":{
         "/api/v1/users":{
             "get":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Users"
                 ],
@@ -38,6 +53,9 @@
                 }
             },
             "post": {
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Users"
                 ],
@@ -69,6 +87,9 @@
         },
         "/api/v1/users/{id}":{
             "get":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Users"
                 ],
@@ -91,6 +112,9 @@
                 }
             },
             "put":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Users"
                 ],
@@ -130,6 +154,9 @@
                 }
             },
             "delete":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Users"
                 ],
@@ -153,6 +180,9 @@
         },
         "/api/v1/auth/login":{
             "post":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Auth"
                 ],
@@ -184,6 +214,9 @@
         },
         "/api/v1/auth/register":{
             "post":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Auth"
                 ],
@@ -215,6 +248,9 @@
         },
         "/api/v1/todos":{
             "get":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Todos"
                 ],
@@ -227,6 +263,9 @@
                 }
             },
             "post": {
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Todos"
                 ],
@@ -255,6 +294,9 @@
         },
         "/api/v1/todos/{id}":{
             "get":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Todos"
                 ],
@@ -263,11 +305,11 @@
                 "parameters":[
                     {
                         "in": "path",
-                        "name": "user_id",
+                        "name": "id",
                         "schema":{
                             "type": "integer"
                         },
-                        "description": "User Id"
+                        "description": "Todo Id"
                     }
                 ],
                 "responses": {
@@ -277,6 +319,9 @@
                 }
             },
             "put":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Todos"
                 ],
@@ -285,11 +330,11 @@
                 "parameters":[
                     {
                         "in": "path",
-                        "name": "user_id",
+                        "name": "id",
                         "schema":{
                             "type": "integer"
                         },
-                        "description": "User Id"
+                        "description": "Todo Id"
                     }
                 ],
                 "requestBody":{
@@ -313,6 +358,9 @@
                 }
             },
             "delete":{
+                "security":[{
+                    "bearerAuth": []
+                }],
                 "tags":[
                     "Todos"
                 ],
